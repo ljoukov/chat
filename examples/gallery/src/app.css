@@ -1,0 +1,400 @@
+@reference "../../_shared/src/lib/app.css";
+@import "../../_shared/src/lib/app.css";
+
+.gallery-app {
+	@apply min-h-screen bg-background text-foreground;
+}
+
+.gallery-app.is-sidebar-collapsed .gallery-sidebar {
+	display: none;
+}
+
+.gallery-sidebar {
+	@apply border-b bg-sidebar px-4 py-4 text-sidebar-foreground;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.gallery-sidebar__header {
+	@apply shrink-0;
+}
+
+.gallery-sidebar__header-main {
+	@apply grid gap-3;
+}
+
+.gallery-sidebar__content {
+	@apply flex-1 overflow-y-auto pt-4;
+	min-height: 0;
+}
+
+.gallery-brand {
+	@apply space-y-2;
+}
+
+.gallery-brand__eyebrow {
+	@apply inline-flex items-center rounded-md border bg-secondary px-2 py-1 text-[11px] font-medium tracking-[0.14em] text-secondary-foreground uppercase;
+}
+
+.gallery-brand__title {
+	@apply text-xl font-semibold tracking-tight;
+}
+
+.gallery-brand__copy {
+	@apply text-sm leading-6 text-sidebar-foreground/70;
+}
+
+.gallery-theme {
+	@apply grid grid-cols-3 gap-2;
+}
+
+.gallery-theme__button {
+	@apply inline-flex items-center justify-center rounded-md border bg-background px-2.5 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground;
+}
+
+.gallery-theme__button.is-active {
+	@apply border-foreground/15 bg-foreground text-background shadow-sm;
+}
+
+.gallery-nav {
+	@apply flex flex-col gap-6;
+}
+
+.gallery-nav__group {
+	@apply grid gap-3;
+	align-content: start;
+}
+
+.gallery-nav__group-label {
+	@apply px-3 text-[11px] font-medium tracking-[0.14em] text-sidebar-foreground/55 uppercase;
+}
+
+.gallery-nav__group-items {
+	@apply flex flex-col gap-1;
+}
+
+.gallery-nav__link {
+	@apply grid gap-0.5 rounded-lg border border-transparent px-3 py-2 text-left no-underline transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+}
+
+.gallery-nav__link.is-active {
+	@apply border-sidebar-border bg-sidebar-accent text-sidebar-accent-foreground shadow-sm;
+}
+
+.gallery-nav__title {
+	@apply text-sm font-medium;
+}
+
+.gallery-nav__caption {
+	@apply text-xs leading-4 text-sidebar-foreground/65;
+}
+
+.gallery-main {
+	@apply min-w-0 overflow-y-auto;
+}
+
+.gallery-main__bar {
+	@apply sticky top-0 z-20 flex items-center justify-between gap-3 border-b bg-background/95 px-4 py-3 backdrop-blur;
+}
+
+.gallery-bar__start {
+	@apply flex min-w-0 items-center gap-3;
+}
+
+.gallery-sidebar-trigger {
+	@apply inline-flex items-center justify-center rounded-md border bg-background text-muted-foreground shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground;
+	width: 2rem;
+	height: 2rem;
+}
+
+.gallery-sidebar-trigger__icon {
+	width: 1rem;
+	height: 1rem;
+}
+
+.gallery-breadcrumbs {
+	@apply flex min-w-0 flex-wrap items-center gap-2 text-sm text-muted-foreground;
+}
+
+.gallery-breadcrumbs__item {
+	@apply truncate;
+}
+
+.gallery-breadcrumbs__item.is-current {
+	@apply font-medium text-foreground;
+}
+
+.gallery-breadcrumbs__separator {
+	@apply text-muted-foreground/55;
+}
+
+.gallery-main__content {
+	@apply mx-auto w-full max-w-[96rem] px-5 pt-9 pb-10;
+}
+
+.gallery-page {
+	@apply mx-auto max-w-[78rem];
+}
+
+.gallery-page--wide {
+	@apply max-w-[88rem];
+}
+
+.gallery-page__intro {
+	@apply mb-8 grid gap-3;
+}
+
+.gallery-page__eyebrow {
+	@apply text-xs font-medium tracking-[0.14em] text-muted-foreground uppercase;
+}
+
+.gallery-page__title {
+	@apply max-w-[18ch] text-4xl font-semibold tracking-tight text-balance;
+}
+
+.gallery-page__description {
+	@apply max-w-3xl text-sm leading-6 text-muted-foreground;
+}
+
+.gallery-stage {
+	@apply rounded-2xl border bg-card p-6 text-card-foreground shadow-sm;
+}
+
+.gallery-stage + .gallery-stage {
+	@apply mt-5;
+}
+
+.gallery-stage__header {
+	@apply mb-5 flex flex-wrap items-start justify-between gap-3;
+}
+
+.gallery-stage__title {
+	@apply text-sm font-semibold tracking-tight;
+}
+
+.gallery-stage__copy {
+	@apply max-w-2xl text-sm leading-6 text-muted-foreground;
+}
+
+.gallery-grid {
+	@apply grid gap-6;
+}
+
+.gallery-grid--two,
+.gallery-grid--three {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.gallery-frame {
+	@apply rounded-xl border bg-background p-5;
+}
+
+.gallery-list {
+	@apply grid gap-4;
+}
+
+.gallery-list__item {
+	@apply grid gap-4 rounded-xl border bg-background px-5 py-5 no-underline transition-colors hover:bg-accent/50;
+}
+
+.gallery-list__item-title {
+	@apply mb-1 text-sm font-medium text-foreground;
+}
+
+.gallery-list__item-copy {
+	@apply text-sm leading-5 text-muted-foreground;
+}
+
+.gallery-pill {
+	@apply inline-flex items-center rounded-md border bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground;
+}
+
+.gallery-canvas {
+	@apply rounded-xl border bg-muted/40 p-4;
+}
+
+.gallery-note {
+	@apply rounded-lg border bg-muted/40 px-4 py-3 text-sm leading-6 text-muted-foreground;
+}
+
+.gallery-note strong {
+	@apply font-medium text-foreground;
+}
+
+.gallery-inline-preview {
+	@apply flex flex-wrap items-center gap-3;
+}
+
+.gallery-inline-chip {
+	@apply inline-flex items-center gap-2 rounded-md border bg-background px-3 py-2;
+}
+
+.gallery-toolbar {
+	@apply flex flex-wrap gap-3;
+}
+
+.gallery-surface {
+	@apply rounded-2xl border bg-card shadow-md;
+}
+
+.gallery-render {
+	@apply w-full bg-background px-5 py-6 text-foreground;
+	display: grid;
+	place-items: start center;
+}
+
+.gallery-render__panel {
+	width: min(100%, 60rem);
+	box-sizing: border-box;
+	padding: 0.75rem;
+}
+
+.gallery-render__panel--narrow {
+	width: min(100%, 48rem);
+}
+
+.gallery-render__panel--wide {
+	width: min(100%, 76rem);
+}
+
+.gallery-render__panel--chat {
+	width: min(100%, 82rem);
+}
+
+.render-showcase {
+	@apply grid gap-4;
+}
+
+.render-showcase--two,
+.render-showcase--three {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.render-card {
+	@apply grid gap-3 rounded-[1.4rem] border bg-card p-5 text-card-foreground shadow-sm;
+}
+
+.render-card--muted {
+	@apply bg-muted/35;
+}
+
+.render-label {
+	@apply text-[11px] font-medium tracking-[0.14em] text-muted-foreground uppercase;
+}
+
+.render-copy {
+	@apply text-sm leading-6 text-muted-foreground;
+}
+
+.render-chat-frame {
+	@apply rounded-[1.6rem] border bg-card p-4 shadow-sm;
+}
+
+.render-target--padded {
+	@apply p-4;
+}
+
+.render-attachment-row {
+	@apply grid gap-2 sm:grid-cols-2;
+}
+
+.render-attachment-pill {
+	@apply grid gap-0.5 rounded-xl border bg-background px-3 py-2 text-left shadow-xs;
+}
+
+:global(body:has(.gallery-render.theme-light)) {
+	background: oklch(1 0 0);
+	color: oklch(0.141 0.005 285.823);
+}
+
+:global(body:has(.gallery-render.theme-dark)) {
+	background: oklch(0.141 0.005 285.823);
+	color: oklch(0.985 0 0);
+}
+
+@media (min-width: 640px) {
+	.gallery-list__item {
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+	}
+
+	.gallery-page__description {
+		@apply text-base;
+	}
+
+	.gallery-render {
+		@apply px-8 py-8;
+	}
+}
+
+@media (min-width: 768px) {
+	.gallery-app {
+		display: grid;
+		grid-template-columns: 23rem minmax(0, 1fr);
+		height: 100vh;
+		overflow: hidden;
+		transition: grid-template-columns 0.2s ease;
+	}
+
+	.gallery-app.is-sidebar-collapsed {
+		grid-template-columns: 0 minmax(0, 1fr);
+	}
+
+	.gallery-app.is-sidebar-collapsed .gallery-sidebar {
+		display: flex;
+		transform: translateX(calc(-100% - 1px));
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.gallery-sidebar {
+		@apply flex h-screen flex-col border-r border-b-0 px-0 py-0;
+		transition:
+			transform 0.2s ease,
+			opacity 0.2s ease;
+	}
+
+	.gallery-sidebar__header {
+		@apply border-b border-sidebar-border px-5 py-5;
+	}
+
+	.gallery-sidebar__content {
+		@apply min-h-0 flex-1 overflow-y-auto px-4 py-5;
+	}
+
+	.gallery-main {
+		@apply h-screen;
+	}
+
+	.gallery-main__bar {
+		@apply px-5 py-3;
+	}
+
+	.gallery-main__content {
+		@apply px-10 pt-12 pb-14;
+	}
+
+	.gallery-stage {
+		@apply p-6;
+	}
+}
+
+@media (min-width: 1280px) {
+	.gallery-grid--two {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gallery-grid--three {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.render-showcase--two {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.render-showcase--three {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
