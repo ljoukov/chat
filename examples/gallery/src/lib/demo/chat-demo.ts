@@ -33,6 +33,8 @@ export const sampleImageAttachment: ChatAttachment = {
 	id: 'attachment-image',
 	kind: 'image',
 	name: 'layout-preview.png',
+	sizeLabel: '1.8 MB',
+	status: 'ready',
 	src: makeImage('Layout preview', '#0f172a', '#7c3aed')
 };
 
@@ -41,7 +43,25 @@ export const sampleFileAttachment: ChatAttachment = {
 	detail: 'Client brief',
 	id: 'attachment-file',
 	kind: 'file',
-	name: 'briefing-pack.pdf'
+	name: 'briefing-pack.pdf',
+	sizeLabel: '240 KB',
+	status: 'ready'
+};
+
+export const sampleUploadingImageAttachment: ChatAttachment = {
+	...sampleImageAttachment,
+	id: 'attachment-image-uploading',
+	name: 'camera-capture.jpg',
+	status: 'uploading'
+};
+
+export const sampleFailedFileAttachment: ChatAttachment = {
+	...sampleFileAttachment,
+	detail: 'Retry required',
+	error: 'Upload failed. Retry or remove this file.',
+	id: 'attachment-file-failed',
+	name: 'scan-annotated.pdf',
+	status: 'failed'
 };
 
 export const emptySuggestions = [

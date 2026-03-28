@@ -232,8 +232,12 @@
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 0.55rem 0.85rem;
-		border-bottom: 1px solid color-mix(in srgb, white 8%, transparent);
-		background: color-mix(in srgb, var(--lj-chat-markdown-code-bg, rgba(15, 23, 42, 0.96)) 88%, white 12%);
+		border-bottom: 1px solid
+			var(--lj-chat-markdown-code-header-border, color-mix(in srgb, white 8%, transparent));
+		background: var(
+			--lj-chat-markdown-code-header-bg,
+			color-mix(in srgb, var(--lj-chat-markdown-code-bg, rgba(15, 23, 42, 0.96)) 88%, white 12%)
+		);
 	}
 
 	:global(.chat-markdown .code-block__lang) {
@@ -241,7 +245,7 @@
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: color-mix(in srgb, white 74%, transparent);
+		color: var(--lj-chat-markdown-code-header-fg, color-mix(in srgb, white 74%, transparent));
 	}
 
 	:global(.chat-markdown .code-block__copy) {
@@ -252,7 +256,7 @@
 		height: 2rem;
 		border-radius: 999px;
 		border: none;
-		background: color-mix(in srgb, white 10%, transparent);
+		background: var(--lj-chat-markdown-code-copy-bg, color-mix(in srgb, white 10%, transparent));
 		color: inherit;
 	}
 

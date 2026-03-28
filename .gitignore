@@ -12,6 +12,7 @@ node_modules
 /dist
 **/build
 **/dist
+.tmp
 
 # OS
 .DS_Store

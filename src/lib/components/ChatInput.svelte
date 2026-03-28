@@ -27,8 +27,8 @@
 		value = $bindable(''),
 		placeholder = 'Type your message',
 		disabled = false,
-		maxLines = 8,
-		maxChars = 12_000,
+		maxLines = 7,
+		maxChars = 1000,
 		ariaLabel = 'Message',
 		autocomplete = 'off',
 		spellcheck = false,
@@ -44,6 +44,8 @@
 
 	let textareaElement = $state<HTMLTextAreaElement | null>(null);
 	let expanded = $state(false);
+	let lastLayoutValue = $state(value);
+	let lastLayoutExpanded = $state(false);
 
 	function resizeTextarea() {
 		if (!textareaElement) {
@@ -74,7 +76,11 @@
 		textareaElement.style.overflowY = textareaElement.scrollHeight > maxHeight ? 'auto' : 'hidden';
 		textareaElement.dataset.expanded = isExpanded ? 'true' : 'false';
 
-		onLayoutChange?.({ isExpanded, value });
+		if (lastLayoutExpanded !== isExpanded || lastLayoutValue !== value) {
+			lastLayoutExpanded = isExpanded;
+			lastLayoutValue = value;
+			onLayoutChange?.({ isExpanded, value });
+		}
 	}
 
 	function handleInput(event: Event) {
@@ -123,6 +129,7 @@
 
 		const observedTarget = textareaElement.parentElement ?? textareaElement;
 		let frameId = 0;
+		let lastObservedWidth = observedTarget.getBoundingClientRect().width;
 
 		const scheduleResize = () => {
 			if (frameId) {
@@ -135,7 +142,14 @@
 			});
 		};
 
-		const observer = new ResizeObserver(() => {
+		const observer = new ResizeObserver((entries) => {
+			const entry = entries[0];
+			const nextWidth = entry?.contentRect.width ?? observedTarget.getBoundingClientRect().width;
+			if (Math.abs(nextWidth - lastObservedWidth) < 0.5) {
+				return;
+			}
+
+			lastObservedWidth = nextWidth;
 			scheduleResize();
 		});
 
@@ -184,7 +198,7 @@
 	}
 
 	.chat-input--default {
-		min-height: 2.875rem;
+		min-height: 2.75rem;
 		padding: 0.75rem 1rem;
 		border: 2px solid var(--lj-chat-input-border, rgba(228, 228, 231, 0.95));
 		border-radius: 1rem;

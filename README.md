@@ -1,22 +1,18 @@
-# @ljoukov/chat
+# `@ljoukov/chat` [![npm version](https://img.shields.io/npm/v/%40ljoukov%2Fchat.svg)](https://www.npmjs.com/package/@ljoukov/chat) [![npm downloads](https://img.shields.io/npm/dm/%40ljoukov%2Fchat.svg)](https://www.npmjs.com/package/@ljoukov/chat) [![CI](https://github.com/ljoukov/chat/actions/workflows/ci.yml/badge.svg)](https://github.com/ljoukov/chat/actions/workflows/ci.yml) [![license](https://img.shields.io/npm/l/%40ljoukov%2Fchat.svg)](./LICENSE) [![gallery](https://img.shields.io/badge/gallery-live-0ea5e9.svg)](https://chat.ljoukov.workers.dev/)
 
-[![npm version](https://img.shields.io/npm/v/@ljoukov/chat.svg)](https://www.npmjs.com/package/@ljoukov/chat)
-[![CI](https://github.com/ljoukov/chat/actions/workflows/ci.yml/badge.svg)](https://github.com/ljoukov/chat/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+Composable Svelte chat UI for assistant-style products: threaded transcripts, Spark-style composer shells, markdown replies, attachments, task cards, and custom in-thread parts.
 
-Composable Svelte 5 chat UI for assistant-style products.
+Live gallery: [chat.ljoukov.workers.dev](https://chat.ljoukov.workers.dev/)
 
-`@ljoukov/chat` focuses on the rendering layer: thread layouts, markdown replies, autosizing inputs, richer composers, in-thread task cards, and extension points for app-specific embedded components.
+## What It Includes
 
-## Screenshots
-
-![Interactive chat surface](docs/screenshots/chat-demo.png)
-
-![ChatInput](docs/screenshots/chat-input.png)
-
-![ChatComposer](docs/screenshots/chat-composer.png)
-
-![ChatTaskCard](docs/screenshots/chat-task-card.png)
+- `ChatView`: top-level transcript surface with empty states, toolbar slot, composer slot, and custom-part rendering
+- `ChatComposer`: Spark-style composer shell with stepped multiline growth, attachment previews, action menu, mic button, and submit states
+- `ChatInput`: autosizing textarea for both standalone forms and chat shells
+- `ChatMessage`: mapped message renderer for text, markdown, thinking, status, task cards, attachments, and custom parts
+- `ChatTaskCard`: presentational run-state card for queued, running, ready, failed, or complete work
+- `ChatMarkdown`: shared markdown renderer with KaTeX maths, syntax-highlighted code, and copy buttons for fenced code
+- helper factories such as `textPart()`, `markdownPart()`, `thinkingPart()`, `statusPart()`, `taskPart()`, and `customPart()`
 
 ## Install
 
@@ -24,17 +20,7 @@ Composable Svelte 5 chat UI for assistant-style products.
 npm install @ljoukov/chat
 ```
 
-The package ships as ESM and is designed for Svelte 5 projects.
-
-## What You Get
-
-- `ChatView` for the main thread shell
-- `ChatMessage` for user, assistant, and system turns
-- `ChatMarkdown` for markdown, tables, code blocks, and KaTeX
-- `ChatTaskCard` for progress and status artifacts inside the thread
-- `ChatInput` for autosizing text input
-- `ChatComposer` for a richer input shell with action buttons
-- typed helpers such as `textPart()`, `markdownPart()`, `taskPart()`, `thinkingPart()`, and `customPart()`
+The package ships as ESM and does not require any global stylesheet import.
 
 ## Quick Start
 
@@ -98,80 +84,246 @@ The package ships as ESM and is designed for Svelte 5 projects.
 </ChatView>
 ```
 
-## Custom Parts
+Use `customPart()` and the `customPart` snippet when your app needs to inject richer UI into an assistant turn without changing the library itself.
 
-Use `customPart()` when your app needs to embed richer UI inside an assistant turn without changing the library itself.
+## Surface Catalog
 
-```svelte
-<script lang="ts">
-	import { ChatView, customPart, textPart, type ChatCustomPart } from '@ljoukov/chat';
-	import AgentStatusCard from './AgentStatusCard.svelte';
+The sections below show the exported chat surfaces, where they are implemented, what they are for, and the inputs they expect.
 
-	const messages = [
-		{
-			id: 'assistant-status',
-			role: 'assistant',
-			parts: [
-				customPart('agent-status', {
-					title: 'Analysis agent',
-					progress: 72,
-					stage: 'Collecting the final evidence bundle',
-					summary: 'Reconciling the remaining open blockers.',
-					updates: ['Attached context pack', 'Generated a condensed plan']
-				})
-			]
-		},
-		{
-			id: 'assistant-copy',
-			role: 'assistant',
-			parts: [textPart('The custom card stays inside the same transcript flow as the rest of the reply.')]
-		}
-	];
-</script>
+### ChatView
 
-<ChatView {messages}>
-	{#snippet customPart(part: ChatCustomPart)}
-		{#if part.key === 'agent-status'}
-			<AgentStatusCard status={part.data as never} />
-		{/if}
-	{/snippet}
-</ChatView>
-```
+Implements: [`ChatView`](src/lib/components/ChatView.svelte)
 
-## Message Model
+Description: Top-level transcript shell with optional heading, toolbar, empty state, message list, composer slot, and custom-part rendering.
 
-`ChatView` consumes an array of `ChatMessageData`.
+Required inputs
 
-Each message contains:
+- none
 
-- `role`: `user`, `assistant`, or `system`
-- `attachments`: optional attachment metadata
-- `parts`: an ordered list of content parts
+Optional inputs
 
-Built-in parts:
+- `messages`
+- `title`
+- `description`
+- `emptyTitle`
+- `emptyDescription`
+- `emptySuggestions`
+- `toolbar`
+- `composer`
+- `customPart`
+- `class`
 
-- `text`
-- `markdown`
-- `thinking`
-- `status`
+<p>
+  <img src="docs/screenshots/render-chat-light.png" alt="ChatView surface in light mode" width="49%" />
+  <img src="docs/screenshots/render-chat-dark.png" alt="ChatView surface in dark mode" width="49%" />
+</p>
+
+### ChatComposer
+
+Implements: [`ChatComposer`](src/lib/components/ChatComposer.svelte)
+
+Description: Spark-style composer shell with stepped multiline growth, draft-attachment previews, retry/remove affordances, action menu, mic button, and submit states.
+
+Required inputs
+
+- none
+
+Optional inputs
+
+- `value`
+- `attachments`
+- `attachmentError`
+- `attachAction`
+- `cameraAction`
+- `micAction`
+- `attachmentShortcutLabel`
+- `submitMode`
+- `submitReady`
+- `placeholder`
+- `showSubmitSpinner`
+- `compactSubmitSpinner`
+- `disabled`
+- `maxLines`
+- `maxChars`
+- `onRemoveAttachment`
+- `onRetryAttachment`
+- `onInput`
+- `onPaste`
+- `onSubmit`
+- `ariaLabel`
+- `sendAriaLabel`
+- `autocomplete`
+- `spellcheck`
+- `class`
+- `inputClass`
+
+<p>
+  <img src="docs/screenshots/render-composer-light.png" alt="ChatComposer in light mode" width="100%" />
+</p>
+<p>
+  <img src="docs/screenshots/render-composer-dark.png" alt="ChatComposer in dark mode" width="100%" />
+</p>
+
+### ChatInput
+
+Implements: [`ChatInput`](src/lib/components/ChatInput.svelte)
+
+Description: Autosizing textarea primitive for both standalone form fields and inline chat composers.
+
+Required inputs
+
+- none
+
+Optional inputs
+
+- `value`
+- `variant`
+- `placeholder`
+- `submitMode`
+- `disabled`
+- `maxLines`
+- `maxChars`
+- `onInput`
+- `onLayoutChange`
+- `onPaste`
+- `onSubmit`
+- `ariaLabel`
+- `autocomplete`
+- `spellcheck`
+- `class`
+- `inputClass`
+
+<p>
+  <img src="docs/screenshots/render-input-light.png" alt="ChatInput in light mode" width="100%" />
+</p>
+<p>
+  <img src="docs/screenshots/render-input-dark.png" alt="ChatInput in dark mode" width="100%" />
+</p>
+
+### ChatMessage
+
+Implements: [`ChatMessage`](src/lib/components/ChatMessage.svelte)
+
+Description: Single message renderer for user, assistant, and system turns, including attachments and ordered content parts.
+
+Required inputs
+
+- `message`
+- `message.id`
+- `message.role`
+- `message.parts[]`
+
+Optional inputs
+
+- `message.attachments`
+- `message.label`
+- `customPart`
+
+<p>
+  <img src="docs/screenshots/render-message-light.png" alt="ChatMessage in light mode" width="100%" />
+</p>
+<p>
+  <img src="docs/screenshots/render-message-dark.png" alt="ChatMessage in dark mode" width="100%" />
+</p>
+
+### ChatTaskCard
+
+Implements: [`ChatTaskCard`](src/lib/components/ChatTaskCard.svelte)
+
+Description: Presentational run-state card for long-running work, with progress, stats, warnings, timestamps, and follow-up actions.
+
+Required inputs
+
 - `task`
-- `custom`
+- `task.status`
+- `task.title`
 
-## API Notes
+Optional inputs
 
-- Component APIs are typed with Svelte 5 `$props`.
-- Composition uses snippet props rather than legacy slots where that keeps the surface cleaner.
-- Interaction hooks use callback props instead of `createEventDispatcher`.
-- The package does not depend on SvelteKit-only modules, so it can be consumed outside SvelteKit projects.
-- `ChatTaskCard` is presentational. Adapt your own task or agent models into the exported `ChatTaskCardData` shape.
+- `task.accent`
+- `task.actions`
+- `task.eyebrow`
+- `task.meta`
+- `task.progress`
+- `task.startedAt`
+- `task.stats`
+- `task.statusLabel`
+- `task.subtitle`
+- `task.summary`
+- `task.warning`
+- `class`
 
-## Examples
+<p>
+  <img src="docs/screenshots/render-task-card-light.png" alt="ChatTaskCard in light mode" width="100%" />
+</p>
+<p>
+  <img src="docs/screenshots/render-task-card-dark.png" alt="ChatTaskCard in dark mode" width="100%" />
+</p>
 
-The repository includes a SvelteKit demo app under [`examples/gallery`](examples/gallery) with:
+### ChatMarkdown
 
-- a structured demo app for the public components
-- isolated `/render/*` routes for component-only visual examples
-- a chat surface showing markdown, attachments, task cards, and embedded custom parts together
+Implements: [`ChatMarkdown`](src/lib/components/ChatMarkdown.svelte)
+
+Description: Shared markdown renderer with KaTeX maths, syntax-highlighted code blocks, inline mode, and copy buttons for fenced code.
+
+Required inputs
+
+- `markdown`
+
+Optional inputs
+
+- `inline`
+- `class`
+
+<p>
+  <img src="docs/screenshots/render-markdown-light.png" alt="ChatMarkdown in light mode" width="100%" />
+</p>
+<p>
+  <img src="docs/screenshots/render-markdown-dark.png" alt="ChatMarkdown in dark mode" width="100%" />
+</p>
+
+## Public API
+
+```ts
+import {
+	ChatComposer,
+	ChatInput,
+	ChatMarkdown,
+	ChatMessage,
+	ChatTaskCard,
+	ChatView,
+	customPart,
+	formatBytes,
+	formatRelativeTime,
+	markdownPart,
+	renderChatMarkdown,
+	renderChatMarkdownInline,
+	statusPart,
+	taskPart,
+	textPart,
+	thinkingPart,
+	type ChatAttachment,
+	type ChatAttachmentKind,
+	type ChatAttachmentStatus,
+	type ChatComposerAction,
+	type ChatCustomPart,
+	type ChatMarkdownPart,
+	type ChatMessageData,
+	type ChatMessagePart,
+	type ChatPartStatusTone,
+	type ChatRole,
+	type ChatStatusPart,
+	type ChatSuggestion,
+	type ChatTaskCardAction,
+	type ChatTaskCardData,
+	type ChatTaskCardPart,
+	type ChatTaskCardProgress,
+	type ChatTaskCardStat,
+	type ChatTaskStatus,
+	type ChatTextPart,
+	type ChatThinkingPart
+} from '@ljoukov/chat';
+```
 
 ## License
 

@@ -67,7 +67,7 @@
 
 <div class="gallery-page">
 	<header class="gallery-page__intro">
-		<div class="gallery-page__eyebrow">ChatMessage</div>
+		<div class="gallery-page__eyebrow">Message</div>
 		<h1 class="gallery-page__title">Message states for user, assistant, system, and custom parts.</h1>
 		<p class="gallery-page__description">
 			A message can carry attachments plus an ordered list of text, markdown, thinking, status, task,
@@ -80,7 +80,7 @@
 			<div>
 				<p class="gallery-stage__title">Supported message states</p>
 				<p class="gallery-stage__copy">
-					Each example below is a single `ChatMessageData` object rendered in isolation.
+					Each example below is a single <code>ChatMessageData</code> object rendered in isolation.
 				</p>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 			{#each messageStates as message (message.id)}
 				<div class="gallery-frame">
 					<ChatMessage {message}>
-					{#snippet customPart(part: ChatCustomPart)}
+						{#snippet customPart(part: ChatCustomPart)}
 							{#if part.key === 'agent-status'}
 								<AgentStatusCard status={part.data as never} />
 							{/if}

@@ -23,6 +23,11 @@
 	let multilineValue = $state(
 		'Shift+Enter keeps line breaks.\n\nThe autoresize logic steps deliberately from one line to two, then to explicit multiline.'
 	);
+	const previewSurfaceStyle = $derived(
+		theme === 'dark'
+			? 'padding: 24px; border-radius: 24px; border: 1px solid var(--border); background: color-mix(in srgb, var(--card) 88%, black);'
+			: 'padding: 24px; border-radius: 24px; border: 1px solid var(--border); background: color-mix(in srgb, white 92%, #f4f4f5);'
+	);
 </script>
 
 <svelte:head>
@@ -36,7 +41,7 @@
 	state={variant}
 	panelClass="gallery-render__panel--narrow"
 	targetClass="render-target--padded"
-	targetStyle="padding: 24px; border-radius: 24px; background: color-mix(in srgb, white 92%, #f4f4f5);"
+	targetStyle={previewSurfaceStyle}
 >
 	{#if variant === 'filled'}
 		<ChatInput bind:value={defaultValue} variant="default" submitMode="enter" />
@@ -50,7 +55,7 @@
 	{:else if variant === 'multiline'}
 		<ChatInput
 			bind:value={multilineValue}
-			variant="chat"
+			variant="default"
 			maxLines={12}
 			placeholder="Shift+Enter for a newline"
 			submitMode="modEnter"

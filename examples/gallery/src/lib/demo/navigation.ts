@@ -1,80 +1,54 @@
 export type DemoNavItem = {
 	caption: string;
-	group: string;
 	href: string;
 	label: string;
 };
 
-export type DemoNavGroup = {
-	items: DemoNavItem[];
-	label: string;
-};
-
-export const demoNavigation: DemoNavGroup[] = [
+export const demoNavigation: DemoNavItem[] = [
 	{
-		label: 'Demo',
-		items: [
-			{
-				group: 'Demo',
-				href: '/',
-				label: 'Overview',
-				caption: 'Landing and route map'
-			},
-			{
-				group: 'Demo',
-				href: '/chat',
-				label: 'Chat In Action',
-				caption: 'Live chat demo'
-			}
-		]
+		href: '/',
+		label: 'Overview',
+		caption: 'Routes and render surfaces'
 	},
 	{
-		label: 'Components',
-		items: [
-			{
-				group: 'Components',
-				href: '/components/input',
-				label: 'ChatInput',
-				caption: 'Autosize'
-			},
-			{
-				group: 'Components',
-				href: '/components/composer',
-				label: 'ChatComposer',
-				caption: 'Composer shell'
-			},
-			{
-				group: 'Components',
-				href: '/components/markdown',
-				label: 'ChatMarkdown',
-				caption: 'Markdown'
-			},
-			{
-				group: 'Components',
-				href: '/components/message',
-				label: 'ChatMessage',
-				caption: 'Messages'
-			},
-			{
-				group: 'Components',
-				href: '/components/task-card',
-				label: 'ChatTaskCard',
-				caption: 'Task cards'
-			},
-			{
-				group: 'Components',
-				href: '/components/thread',
-				label: 'ChatView',
-				caption: 'Threads'
-			}
-		]
+		href: '/chat',
+		label: 'Chat',
+		caption: 'Live thread demo'
+	},
+	{
+		href: '/composer',
+		label: 'Composer',
+		caption: 'Spark-style input shell'
+	},
+	{
+		href: '/input',
+		label: 'Input',
+		caption: 'Autosize textarea'
+	},
+	{
+		href: '/markdown',
+		label: 'Markdown',
+		caption: 'Rich text rendering'
+	},
+	{
+		href: '/message',
+		label: 'Message',
+		caption: 'Attachments and message parts'
+	},
+	{
+		href: '/task-card',
+		label: 'Task card',
+		caption: 'Run state card'
+	},
+	{
+		href: '/thread',
+		label: 'Thread',
+		caption: 'Full transcript surface'
 	}
 ] as const;
 
-export const flatDemoNavigation: DemoNavItem[] = demoNavigation.flatMap((group) => group.items);
-
 export function findDemoNavItem(pathname: string): DemoNavItem | null {
-	for (const item of flatDemoNavigation) {
+	for (const item of demoNavigation) {
 		if (item.href === '/') {
 			if (pathname === '/') {
 				return item;

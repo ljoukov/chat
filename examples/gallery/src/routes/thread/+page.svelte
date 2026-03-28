@@ -38,11 +38,11 @@
 
 <div class="gallery-page gallery-page--wide">
 	<header class="gallery-page__intro">
-		<div class="gallery-page__eyebrow">ChatView</div>
+		<div class="gallery-page__eyebrow">Thread</div>
 		<h1 class="gallery-page__title">Thread shells for empty states, mapped transcripts, and toolbars.</h1>
 		<p class="gallery-page__description">
-			`ChatView` owns the thread surface while routes decide how to provide toolbars, composers, and
-			custom-part rendering.
+			<code>ChatView</code> owns the thread surface while routes decide how to provide toolbars,
+			composers, and custom-part rendering.
 		</p>
 	</header>
 
@@ -81,8 +81,7 @@
 				<div>
 					<p class="gallery-stage__title">Mapped transcript</p>
 					<p class="gallery-stage__copy">
-						Text, markdown, attachments, task cards, and custom parts can all coexist in the same
-						thread.
+						Text, markdown, attachments, task cards, and custom parts can all coexist in the same thread.
 					</p>
 				</div>
 			</div>

@@ -9,7 +9,7 @@
 
 <div class="gallery-page gallery-page--wide">
 	<header class="gallery-page__intro">
-		<div class="gallery-page__eyebrow">ChatTaskCard</div>
+		<div class="gallery-page__eyebrow">Task card</div>
 		<h1 class="gallery-page__title">Every supported run-card state in one place.</h1>
 		<p class="gallery-page__description">
 			Task cards are presentational summaries that stay attached to the message that created them.

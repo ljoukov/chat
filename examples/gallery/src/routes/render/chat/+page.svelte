@@ -4,7 +4,6 @@
 		ChatView,
 		markdownPart,
 		thinkingPart,
-		type ChatAttachment,
 		type ChatCustomPart,
 		type ChatMessageData
 	} from '@ljoukov/chat';
@@ -12,7 +11,8 @@
 	import AgentStatusCard from '$lib/demo/AgentStatusCard.svelte';
 	import {
 		makeUserMessage,
-		sampleFileAttachment
+		sampleFileAttachment,
+		sampleImageAttachment
 	} from '$lib/demo/chat-demo.js';
 	import { customPart } from '@ljoukov/chat';
 	import { page } from '$app/state';
@@ -21,7 +21,7 @@
 	const theme = $derived(resolveRenderTheme(page.url.searchParams));
 
 	let draft = $state('Keep the live status card visible and call out the owner.');
-	let draftAttachments = $state<ChatAttachment[]>([{ ...sampleFileAttachment }]);
+	let draftAttachments = $state([{ ...sampleImageAttachment }, { ...sampleFileAttachment }]);
 
 	const messages = [
 		makeUserMessage(
@@ -85,27 +85,18 @@
 		{/snippet}
 
 		{#snippet composer()}
-			<div class="grid gap-3">
-				<div class="render-attachment-row">
-					{#each draftAttachments as attachment (attachment.id)}
-						<div class="render-attachment-pill">
-							<span class="text-sm font-medium">{attachment.name}</span>
-							<small class="text-xs text-muted-foreground">
-								{attachment.detail ?? attachment.badge ?? 'Attached'}
-							</small>
-						</div>
-					{/each}
-				</div>
-
-				<ChatComposer
-					bind:value={draft}
-					submitMode="enter"
-					attachAction={{ ariaLabel: 'Attach sample brief', icon: 'attach' }}
-					cameraAction={{ ariaLabel: 'Attach sample image', icon: 'camera' }}
-					micAction={{ ariaLabel: 'Prefix draft with voice note', icon: 'mic' }}
-					submitReady={draft.trim().length > 0 || draftAttachments.length > 0}
-				/>
-			</div>
+			<ChatComposer
+				bind:value={draft}
+				attachments={draftAttachments}
+				submitMode="enter"
+				attachAction={{ ariaLabel: 'Attach sample brief', icon: 'attach', label: 'Add photos & files' }}
+				cameraAction={{ ariaLabel: 'Attach sample image', icon: 'camera' }}
+				micAction={{ ariaLabel: 'Prefix draft with voice note', icon: 'mic' }}
+				onRemoveAttachment={(attachment) => {
+					draftAttachments = draftAttachments.filter((entry) => entry.id !== attachment.id);
+				}}
+				submitReady={draft.trim().length > 0 || draftAttachments.length > 0}
+			/>
 		{/snippet}
 	</ChatView>
 </RenderSurface>

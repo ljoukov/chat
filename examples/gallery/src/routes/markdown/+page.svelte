@@ -9,7 +9,7 @@
 
 <div class="gallery-page">
 	<header class="gallery-page__intro">
-		<div class="gallery-page__eyebrow">ChatMarkdown</div>
+		<div class="gallery-page__eyebrow">Markdown</div>
 		<h1 class="gallery-page__title">Markdown renderer for prose, tables, code, and maths.</h1>
 		<p class="gallery-page__description">
 			The renderer supports block and inline modes, KaTeX formulas, syntax-highlighted code blocks, and

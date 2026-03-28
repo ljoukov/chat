@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { ChatComposer } from '@ljoukov/chat';
+	import {
+		sampleFileAttachment,
+		sampleImageAttachment
+	} from '$lib/demo/chat-demo.js';
 	import RenderSurface from '$lib/demo/RenderSurface.svelte';
 	import { resolveRenderTheme } from '$lib/demo/render.js';
 
@@ -8,7 +12,7 @@
 	const variant = $derived.by(() => {
 		const requested = page.url.searchParams.get('state');
 		if (
-			requested === 'empty' ||
+			requested === 'attachments' ||
 			requested === 'expanded' ||
 			requested === 'submitting' ||
 			requested === 'compact'
@@ -22,6 +26,7 @@
 	let expandedDraft = $state(
 		'Draft the note in three parts:\n\n1. Key blockers\n2. Recommended owner\n3. Next milestone'
 	);
+	let readyAttachments = $state([{ ...sampleImageAttachment }, { ...sampleFileAttachment }]);
 </script>
 
 <svelte:head>
@@ -35,19 +40,23 @@
 	state={variant}
 	panelClass="gallery-render__panel--narrow"
 >
-	{#if variant === 'empty'}
+	{#if variant === 'attachments'}
 		<ChatComposer
-			value=""
+			bind:value={idleDraft}
+			attachments={readyAttachments}
 			submitMode="enter"
-			attachAction={{ ariaLabel: 'Attach', icon: 'attach' }}
+			attachAction={{ ariaLabel: 'Attach', icon: 'attach', label: 'Add photos & files' }}
 			cameraAction={{ ariaLabel: 'Take photo', icon: 'camera' }}
 			micAction={{ ariaLabel: 'Voice note', icon: 'mic' }}
+			onRemoveAttachment={(attachment) => {
+				readyAttachments = readyAttachments.filter((entry) => entry.id !== attachment.id);
+			}}
 		/>
 	{:else if variant === 'expanded'}
 		<ChatComposer
 			bind:value={expandedDraft}
 			submitMode="modEnter"
-			attachAction={{ ariaLabel: 'Attach', icon: 'attach' }}
+			attachAction={{ ariaLabel: 'Attach', icon: 'attach', label: 'Add photos & files' }}
 			cameraAction={{ ariaLabel: 'Take photo', icon: 'camera' }}
 			micAction={{ ariaLabel: 'Voice note', icon: 'mic' }}
 		/>
@@ -56,7 +65,7 @@
 			value="Summarising the final note..."
 			submitReady={false}
 			showSubmitSpinner
-			attachAction={{ ariaLabel: 'Attach', icon: 'attach' }}
+			attachAction={{ ariaLabel: 'Attach', icon: 'attach', label: 'Add photos & files' }}
 			micAction={{ ariaLabel: 'Voice note', icon: 'mic' }}
 		/>
 	{:else if variant === 'compact'}
@@ -65,7 +74,7 @@
 		<ChatComposer
 			bind:value={idleDraft}
 			submitMode="enter"
-			attachAction={{ ariaLabel: 'Attach', icon: 'attach' }}
+			attachAction={{ ariaLabel: 'Attach', icon: 'attach', label: 'Add photos & files' }}
 			cameraAction={{ ariaLabel: 'Take photo', icon: 'camera' }}
 			micAction={{ ariaLabel: 'Voice note', icon: 'mic' }}
 		/>
