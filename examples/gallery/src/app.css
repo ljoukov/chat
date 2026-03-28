@@ -1,5 +1,4 @@
-@reference "../../_shared/src/lib/app.css";
-@import "../../_shared/src/lib/app.css";
+@reference './routes/layout.css';
 
 .gallery-app {
   @apply min-h-screen bg-background text-foreground;

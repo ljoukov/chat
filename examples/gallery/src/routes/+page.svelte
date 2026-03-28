@@ -16,7 +16,7 @@
 	] as const;
 </script>
 
-<div class="gallery-page max-w-[54rem]">
+<div class="gallery-page">
 	<header class="gallery-page__intro">
 		<div class="gallery-page__eyebrow">Overview</div>
 		<h1 class="gallery-page__title">Library routes for chat surfaces, composers, and renders.</h1>
@@ -26,7 +26,7 @@
 		</p>
 	</header>
 
-	<section class="gallery-grid gallery-grid--two gap-3 xl:items-start">
+	<section class="gallery-grid gallery-grid--two">
 		<div class="gallery-stage">
 			<div class="gallery-stage__header">
 				<div>

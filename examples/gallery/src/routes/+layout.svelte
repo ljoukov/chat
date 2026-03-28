@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { BROWSER } from 'esm-env';
 	import PanelLeftIcon from '@lucide/svelte/icons/panel-left';
+	import './layout.css';
 	import { page } from '$app/state';
 	import { ModeWatcher } from 'mode-watcher';
 	import '../app.css';

@@ -114,8 +114,8 @@ Optional inputs
 - `class`
 
 <p>
-  <img src="docs/screenshots/render-chat-light.png" alt="ChatView surface in light mode" width="49%" />
-  <img src="docs/screenshots/render-chat-dark.png" alt="ChatView surface in dark mode" width="49%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-chat-light.png" alt="ChatView surface in light mode" width="49%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-chat-dark.png" alt="ChatView surface in dark mode" width="49%" />
 </p>
 
 ### ChatComposer
@@ -158,10 +158,10 @@ Optional inputs
 - `inputClass`
 
 <p>
-  <img src="docs/screenshots/render-composer-light.png" alt="ChatComposer in light mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-composer-light.png" alt="ChatComposer in light mode" width="100%" />
 </p>
 <p>
-  <img src="docs/screenshots/render-composer-dark.png" alt="ChatComposer in dark mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-composer-dark.png" alt="ChatComposer in dark mode" width="100%" />
 </p>
 
 ### ChatInput
@@ -194,10 +194,10 @@ Optional inputs
 - `inputClass`
 
 <p>
-  <img src="docs/screenshots/render-input-light.png" alt="ChatInput in light mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-input-light.png" alt="ChatInput in light mode" width="100%" />
 </p>
 <p>
-  <img src="docs/screenshots/render-input-dark.png" alt="ChatInput in dark mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-input-dark.png" alt="ChatInput in dark mode" width="100%" />
 </p>
 
 ### ChatMessage
@@ -220,10 +220,10 @@ Optional inputs
 - `customPart`
 
 <p>
-  <img src="docs/screenshots/render-message-light.png" alt="ChatMessage in light mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-message-light.png" alt="ChatMessage in light mode" width="100%" />
 </p>
 <p>
-  <img src="docs/screenshots/render-message-dark.png" alt="ChatMessage in dark mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-message-dark.png" alt="ChatMessage in dark mode" width="100%" />
 </p>
 
 ### ChatTaskCard
@@ -254,10 +254,10 @@ Optional inputs
 - `class`
 
 <p>
-  <img src="docs/screenshots/render-task-card-light.png" alt="ChatTaskCard in light mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-task-card-light.png" alt="ChatTaskCard in light mode" width="100%" />
 </p>
 <p>
-  <img src="docs/screenshots/render-task-card-dark.png" alt="ChatTaskCard in dark mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-task-card-dark.png" alt="ChatTaskCard in dark mode" width="100%" />
 </p>
 
 ### ChatMarkdown
@@ -276,10 +276,10 @@ Optional inputs
 - `class`
 
 <p>
-  <img src="docs/screenshots/render-markdown-light.png" alt="ChatMarkdown in light mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-markdown-light.png" alt="ChatMarkdown in light mode" width="100%" />
 </p>
 <p>
-  <img src="docs/screenshots/render-markdown-dark.png" alt="ChatMarkdown in dark mode" width="100%" />
+  <img src="https://raw.githubusercontent.com/ljoukov/chat/main/docs/screenshots/render-markdown-dark.png" alt="ChatMarkdown in dark mode" width="100%" />
 </p>
 
 ## Public API
