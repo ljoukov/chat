@@ -35,11 +35,12 @@
 
 	type Crumb = {
 		label: string;
+		href: string;
 	};
 
 	const breadcrumbs = $derived.by((): Crumb[] => {
 		const pathname = page.url.pathname;
-		const items: Crumb[] = [{ label: 'Gallery' }];
+		const items: Crumb[] = [{ label: 'Gallery', href: '/' }];
 
 		if (pathname === '/') {
 			return items;
@@ -53,12 +54,13 @@
 		const pathParts = pathname.split('/').filter(Boolean);
 
 		if (matchedNav && matchedNav.href !== '/') {
-			items.push({ label: matchedNav.label });
+			items.push({ label: matchedNav.label, href: matchedNav.href });
 		}
 
 		for (let index = consumedParts.length; index < pathParts.length; index += 1) {
 			items.push({
-				label: toTitle(pathParts[index] ?? '')
+				label: toTitle(pathParts[index] ?? ''),
+				href: `/${pathParts.slice(0, index + 1).join('/')}`
 			});
 		}
 
@@ -150,11 +152,17 @@
 					<ol class="gallery-breadcrumb__list">
 						{#each breadcrumbs as crumb, index (crumb.label + ':' + index)}
 							<li class={`gallery-breadcrumb__item ${index === 0 ? 'is-root' : ''}`}>
-								<span
+								<a
+									href={crumb.href}
+									aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+									class={`gallery-breadcrumb__link ${index === breadcrumbs.length - 1 ? 'is-current' : ''}`}
+								>
+									<span
 									class={index === breadcrumbs.length - 1
 										? 'gallery-breadcrumb__page'
 										: 'gallery-breadcrumb__segment'}>{crumb.label}</span
-								>
+									>
+								</a>
 							</li>
 							{#if index < breadcrumbs.length - 1}
 								<li
